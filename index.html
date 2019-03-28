@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Instudy</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: transparent; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 2px rgb(163, 163, 163) solid; padding: 10px; margin-right: .5%; 
+        /* background: rgb(224, 224, 224); */
+        background: white; 
+        margin-left: 225px; 
+        width: 73.5%; 
+        border-radius: 16px; 
+      }
+      form input:focus { 
+        outline: none; 
+        border: 2px rgb(92, 92, 92) solid; 
+        /* background: rgb(204, 204, 204); */
+      }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; 
+        border-radius: 16px; 
+        margin-bottom: 6px; 
+        /* color: white; 
+        background: red;  */
+      }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li {
+        padding: 5px 10px; 
+        margin-left: 225px; 
+        width: 83.5%; 
+        background-color: rgb(216, 216, 216); 
+      }
+      #messages li:nth-child(odd) { background: #eee; margin-left: 225px; width: 83.5%; }
+      #messages { margin-bottom: 40px }
+      .sidenav {
+        height: 100%; 
+        width: 225px; 
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111; 
+        overflow-x: hidden;
+        padding-top: 20px; 
+        color: white; 
+      }
+      .name {
+        position: fixed; 
+        overflow-x: hidden; 
+        color: white; 
+        top: 0; 
+        right: 0; 
+        background-color: rgb(105, 105, 105); 
+        padding: 16px; 
+        margin-right: 16px; 
+        margin-top: 16px; 
+      }
+      html {
+          /* background-color: rgb(140, 0, 255); */
+          background-color: white; 
+      }
+      li.Header {
+        margin-left: 16px; 
+        color: white; 
+        list-style-type: none; 
+        font-size : 24px; 
+      }
+      ul.Duedates {
+        text-align: center; 
+        padding-top: 16px; 
+      }
+      input.iName {
+        border-radius: 6px; 
+        padding-left: 4px; 
+      }
+      input.iName:focus {
+        outline: none; 
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="stylsheet" href="style.css">
+    <div class="sidenav">
+        <li class="Header">Upcoming Due Dates: </li>
+      <ul class="Duedates">
+      </ul>
+    </div>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" placeholder="Type your message here..."/><button  onclick="check(); displayName();">Send</button>
+    </form>
+    <di id="Namedisplay">
+      <ul id="Name list">
+      </ul>
+    </div>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io();
+        $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+        socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      })
+
+      function check() {
+        console.log("Hello");
+        var texts = document.getElementById('m').value; 
+        var text = texts.split(" ");
+        console.log(text); 
+        if (text[0] == '/due') {
+          var allofthem = ' ' + text[2] + ' is due on ' + text[1]; 
+          var node = document.createElement("li");
+          var stringNode = document.createTextNode(allofthem);
+          node.appendChild(stringNode);
+          document.getElementsByClassName("Duedates")[0].appendChild(node); 
+        }
+        console.log(document.getElementById('name').value); 
+        if (document.getElementById('name').value == '') {
+          console.log('yes'); 
+          alert('You must fill in a name first. This message will only go away when you fill in your name. ');
+          var retVal = prompt("Enter your Username here: "); 
+          while (retVal == null || !retVal.replace(/\s/g, '').length) {
+            var retVal = prompt("Enter your Username here: "); 
+          }
+          document.getElementById('name').value = retVal; 
+        }
+      }
+      function displayName() {
+        message = document.getElementById('m').value; 
+        name = document.getElementById('name').value; 
+        var today = new Date();
+        var time = today.getHours() + ":" + today.getMinutes();
+        document.getElementById('m').value = name +  ' - ' + message + ' - ' + time; 
+      }
+    </script>
+    <div class="name">
+      <h1>Display Name: </h1>
+      <input type="text" id="name" autocomplete="off" class="iName">
+    </div>
+  </body>
+</html>

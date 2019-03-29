@@ -137,6 +137,15 @@
           }
           document.getElementById('name').value = retVal; 
         }
+        if (document.getElementById('m').value == '') {
+          console.log('yes'); 
+          alert('Message empty. This message will only go away when you fill in the message. ');
+          var retVal = prompt("Enter your message here: "); 
+          while (retVal == null || !retVal.replace(/\s/g, '').length) {
+            var retVal = prompt("Enter your message here: "); 
+          }
+          document.getElementById('m').value = retVal; 
+        }
       }
       function displayName() {
         message = document.getElementById('m').value; 

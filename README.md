@@ -4,6 +4,6 @@ Instudy is an app where the entire class can cummunicate at a moment's notice. S
 
 # Try-It-Out: 
 
-clastudy.herokuapp.com
+[Clastudy](clastudy.herokuapp.com)
 
 >Note: This app is still under construction. 

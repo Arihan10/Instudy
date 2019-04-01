@@ -133,7 +133,11 @@
           alert('You must fill in a name first. This message will only go away when you fill in your name. ');
           var retVal = prompt("Enter your Username here: "); 
           while (retVal == null || !retVal.replace(/\s/g, '').length) {
-            var retVal = prompt("Enter your Username here: "); 
+            if (retVal != null) {
+              var retVal = prompt("Enter your Username here: "); 
+            } else {
+              window.close();
+            }
           }
           document.getElementById('name').value = retVal; 
         }
@@ -142,7 +146,11 @@
           alert('Message empty. This message will only go away when you fill in the message. ');
           var retVal = prompt("Enter your message here: "); 
           while (retVal == null || !retVal.replace(/\s/g, '').length) {
-            var retVal = prompt("Enter your message here: "); 
+            if (retVal != null) {
+              var retVal = prompt("Enter your message here: "); 
+            } else {
+              window.close; 
+            }
           }
           document.getElementById('m').value = retVal; 
         }

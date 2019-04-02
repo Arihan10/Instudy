@@ -133,24 +133,40 @@
           alert('You must fill in a name first. This message will only go away when you fill in your name. ');
           var retVal = prompt("Enter your Username here: "); 
           while (retVal == null || !retVal.replace(/\s/g, '').length) {
+            //var retVal = prompt("Enter your Username here: "); 
             if (retVal != null) {
               var retVal = prompt("Enter your Username here: "); 
             } else {
-              window.close();
+              document.write('I HATE YOU');
+              parent_disable(); 
             }
           }
           document.getElementById('name').value = retVal; 
+        }
+        var popupWindow=null;
+        
+        function child_open()
+        { 
+        
+        popupWindow =window.open('new.jsp',"_blank","directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600, height=280,top=200,left=200");
+        
+        }
+        function parent_disable() {
+        if(popupWindow && !popupWindow.closed)
+        popupWindow.focus();
         }
         if (document.getElementById('m').value == '') {
           console.log('yes'); 
           alert('Message empty. This message will only go away when you fill in the message. ');
           var retVal = prompt("Enter your message here: "); 
           while (retVal == null || !retVal.replace(/\s/g, '').length) {
+            //var retVal = prompt("Enter your Username here: "); 
             if (retVal != null) {
               var retVal = prompt("Enter your message here: "); 
             } else {
-              window.close; 
-            }
+              document.write('I HATE YOU'); 
+              parent_disable(); 
+            } 
           }
           document.getElementById('m').value = retVal; 
         }

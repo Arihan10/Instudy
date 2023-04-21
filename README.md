@@ -1,6 +1,6 @@
 # Instudy
 
-Instudy is an app where the entire class can cummunicate at a moment's notice. Set duedates, send messages, set alerts (Beta), and so much more!
+Instudy is an app where the entire class can cummunicate at a moment's notice. Set due-dates, send messages, set alerts (Beta), and so much more!
 
 # Try-It-Out: 
 
